@@ -2,31 +2,22 @@ import { parse } from '@babel/core';
 import React, { useState } from 'react';
 import { Text, View, Image, TextInput, TouchableOpacity } from 'react-native';
 import styles from '../components/stylesLogin';
+import { signin } from '../helpers/aloneAPI';
+import { doLogin } from '../helpers/AuthHandler';
 
 
 const Screen = ({navigation}) => {
-
-  const [usuario, setUsuario] = useState('');
+  
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleFazerLogin = async () => {
-    if(usuario !== '' && password !== ''){
-            
-      const req = await fetch('https://api.b7web.com.br/loginsimples/', {
-      method: 'POST',
-      headers:{
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        email: usuario,
-        password: password
-      })
-      });
+    if(email !== '' && password !== ''){                  
 
-      const json = await req.json();
-
-      if(json.status == 'ok'){
-        navigation.navigate('ListarProdutos');
+      const json = await signin(email, password);
+      if(json.token){        
+        doLogin(json.token);
+        navigation.navigate('Home');
       } else{
         alert("Email ou senha inválidos!");
       }
@@ -40,17 +31,14 @@ const Screen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View>
-        <Image 
-          style={styles.image}
-          source={require('../imagens/logo60-2.png')}
-        />
+        <Text style={styles.logo}>Simodis</Text>
       </View>  
       <View>
         <TextInput
-          placeholder="Usuário"
+          placeholder="exemplo@dominio.com.br"
           style={styles.input} 
-          value={usuario}
-          onChangeText={(t)=>setUsuario(t)}
+          value={email}
+          onChangeText={(t)=>setEmail(t)}
         />
       </View>
       <View style={{margin:8}}>
@@ -62,12 +50,14 @@ const Screen = ({navigation}) => {
           onChangeText={(t)=>setPassword(t)}
         />
       </View>  
-      <View style={{flexDirection:"row"}}>
-      
+      <View style={{flexDirection:"row"}}>      
         <TouchableOpacity style={styles.opacity} onPress={handleFazerLogin}>
-          <Text style={styles.text}>Login</Text>
+          <Text style={styles.text}>Signin</Text>
         </TouchableOpacity>
-      </View>
+        <TouchableOpacity style={styles.opacity} onPress={()=> {navigation.navigate('Signup')}}>
+          <Text style={styles.text}>Signup</Text>
+        </TouchableOpacity>
+      </View>      
     </View>
   );
 }

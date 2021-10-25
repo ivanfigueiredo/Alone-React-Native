@@ -12,13 +12,16 @@ const Screen = ({navigation}) => {
                     <View style={styles.efect}>
                         <Image 
                             style={styles.image}
-                            source={require('../imagens/arte_Welcome.png')}
+                            source={require('../imagens/Saly-6.png')}
                             resizeMode="stretch"
                         />
                     </View>
+                    
                 <TouchableOpacity style={styles.button} onPress={()=> {navigation.navigate('Login')}}>
-                    <Text style={{fontSize:35, color:"#FFF", fontWeight:"bold"}}>Next</Text>
+                    <Text style={{fontSize:25, color:"#FFF"}}>Next</Text>
                 </TouchableOpacity>
+                <View style={styles.semicirculoTop}></View>
+                <View style={styles.semicirculoBotton}></View>
             </View>                
         </View>
     );
@@ -26,7 +29,7 @@ const Screen = ({navigation}) => {
     
 Screen.navigationOptions = () => {
     return {
-        title:'Bem Vindo ao Alone Market'
+        title:'Welcome To Simodis'
     }
 }
 

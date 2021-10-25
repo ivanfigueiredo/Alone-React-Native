@@ -3,8 +3,8 @@ import Welcome from '../screams/Welcome';
 import Login from '../screams/Login';
 import Signup from '../screams/Cadastro';
 import ListarProdutos from '../screams/ListarProdutos';
-import Movie from '../screams/Movie';
-import Trailer from '../screams/Trailer';
+import Home from '../screams/Home';
+import Perfil from '../screams/Perfil';
 
 
 const MainNavigator = createStackNavigator({
@@ -20,22 +20,23 @@ const MainNavigator = createStackNavigator({
     ListarProdutos:{
         screen:ListarProdutos
     },
-    Movie:{
-        screen:Movie
+    Home:{
+        screen:Home
     },
-    Trailer:{
-        screen:Trailer
+    Perfil:{
+        screen:Perfil
     },
 }, {
     defaultNavigationOptions:{
+        headerBackTitle:' ',
         headerStyle:{
             height:50
         },
         headerTitleStyle:{
             fontSize:25,
-            color:'#5C9E07'
+            color:'#000000'
         },
-        headerTintColor:'#5C9E07'
+        headerTintColor:'#000000'
         
     }
 });
